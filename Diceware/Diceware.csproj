@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <PackAsTool>true</PackAsTool>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Sebastien ROBERT</Authors>
     <Description>Application that randomly draws words folling the Diceware(TM) rules.</Description>
     <Copyright>Sebastien ROBERT</Copyright>

@@ -83,7 +83,7 @@ namespace Diceware
             return await httpClient.GetStringAsync(downloadUrl);
         }
 
-        public async Task<Dictionary<int, string>> GetWordList()
+        public async Task<Dictionary<int, string>> GetWordList(bool forceDownload)
         {
             if (wordList == null)
             {
@@ -91,10 +91,13 @@ namespace Diceware
 
                 string content;
 
-                if (File.Exists(wordListFilename) == false)
+                if (forceDownload || File.Exists(wordListFilename) == false)
                 {
+                    Console.WriteLine($"Downloading '{downloadUrl}'...");
                     content = await DownloadWordListAsync();
+                    Console.WriteLine($"Writing to cache file '{wordListFilename}'...");
                     await File.WriteAllTextAsync(wordListFilename, content);
+                    Console.WriteLine("Done.");
                 }
                 else
                     content = await File.ReadAllTextAsync(wordListFilename);

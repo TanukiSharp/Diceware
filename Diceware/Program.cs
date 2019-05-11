@@ -29,6 +29,12 @@ namespace Diceware
                 new Argument<string>(WordList.OfficialWordListDownloadUrl)
             );
 
+            var optionForceDownload = new Option(
+                new[] { "-f", "--force-download" },
+                "Force download of the words list even if cache exists. This overwrites the currently cached file if exists.",
+                new Argument<bool>(false)
+            );
+
             var rootCommand = new RootCommand
             {
                 Description = "Application that randomly draws words folling the Diceware(TM) rules."
@@ -36,18 +42,19 @@ namespace Diceware
             rootCommand.AddOption(optionWordCount);
             rootCommand.AddOption(optionExtraSecurity);
             rootCommand.AddOption(optionDownloadUrl);
+            rootCommand.AddOption(optionForceDownload);
 
-            rootCommand.Handler = CommandHandler.Create<int, bool, string>(Run);
+            rootCommand.Handler = CommandHandler.Create<int, bool, string, bool>(Run);
 
             return rootCommand.InvokeAsync(args);
         }
 
-        private static async Task Run(int wordCount, bool extraSecurity, string downloadUrl)
+        private static async Task Run(int wordCount, bool extraSecurity, string downloadUrl, bool forceDownload)
         {
             var wordList = new WordList(downloadUrl);
             var dice = new Dice();
 
-            Dictionary<int, string> words = await wordList.GetWordList();
+            Dictionary<int, string> words = await wordList.GetWordList(forceDownload);
 
             string[] passphrase = new string[wordCount];
 
