@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackAsTool>true</PackAsTool>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <Version>0.1.0</Version>
+    <Authors>Sebastien ROBERT</Authors>
+    <Description>Application that randomly draws words folling the Diceware(TM) rules.</Description>
+    <Copyright>Sebastien ROBERT</Copyright>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <PackageProjectUrl>https://github.com/TanukiSharp/Diceware</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TanukiSharp/Diceware</RepositoryUrl>
+    <PackageTags>diceware passphrase</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine.Experimental" Version="0.2.0-alpha.19174.3" />
+  </ItemGroup>
+
+</Project>
