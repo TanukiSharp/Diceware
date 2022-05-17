@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <Version>0.1.2</Version>
+    <Authors>Sebastien ROBERT</Authors>
+    <Description>Library that randomly draws words following the Diceware(TM) rules.</Description>
+    <Copyright>Sebastien ROBERT</Copyright>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <PackageProjectUrl>https://github.com/TanukiSharp/Diceware</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TanukiSharp/Diceware</RepositoryUrl>
+    <PackageTags>diceware passphrase</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+</Project>

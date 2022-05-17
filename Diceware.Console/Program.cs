@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
-using System.Reflection;
 using System.Threading.Tasks;
+using Diceware.Library;
 
 namespace Diceware
 {
@@ -52,35 +52,10 @@ namespace Diceware
         private static async Task Run(int wordCount, bool extraSecurity, string downloadUrl, bool forceDownload)
         {
             var wordList = new WordList(downloadUrl);
-            var dice = new Dice();
 
             Dictionary<int, string> words = await wordList.GetWordList(forceDownload);
 
-            string[] passphrase = new string[wordCount];
-
-            for (int i = 0; i < wordCount; i++)
-            {
-                int number = dice.DrawWordNumber();
-                passphrase[i] = words[number];
-            }
-
-            if (extraSecurity)
-            {
-                int wordIndex = dice.RollD6() - 1;
-                string chosenWord = passphrase[wordIndex % passphrase.Length];
-                int position = (dice.RollD6() - 1) % chosenWord.Length;
-
-                char extraSecuritySymbol = WordList.ExtraSecurityMatrix[
-                    dice.RollD6() - 1,
-                    dice.RollD6() - 1
-                ];
-
-                chosenWord = $"{chosenWord[..position]}{extraSecuritySymbol}{chosenWord[position..]}";
-
-                passphrase[wordIndex % passphrase.Length] = chosenWord;
-            }
-
-            Console.WriteLine(string.Join(' ', passphrase));
+            Console.WriteLine(Diceware.Library.Diceware.GeneratePassphrase(wordCount, words, extraSecurity));
         }
     }
 }
