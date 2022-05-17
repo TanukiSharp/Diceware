@@ -16,7 +16,7 @@ public class WordList
     private const string StartMarker = "-----BEGIN PGP SIGNED MESSAGE-----";
     private const string EndMarker = "-----BEGIN PGP SIGNATURE-----";
 
-    public const string OfficialWordListDownloadUrl = "http://world.std.com/~reinhold/diceware.wordlist.asc";
+    public const string OfficialWordListDownloadUrl = "https://theworld.com/~reinhold/diceware.wordlist.asc";
 
     public static readonly char[,] ExtraSecurityMatrix =
     {
