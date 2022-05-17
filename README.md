@@ -5,7 +5,7 @@ http://world.std.com/~reinhold/diceware.html
 
 # Install
 
-You must have .NET Core 2.1 or higher.
+You must have .NET 6 or higher.
 
 Open a command line prompt and type:
 ```
