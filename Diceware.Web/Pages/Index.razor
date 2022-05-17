@@ -1,0 +1,22 @@
+﻿@page "/"
+@using Diceware.Library
+
+@inject WordListService wordListService;
+
+<p>
+<span>Result: @passphrase</span>
+</p>
+<p>
+<button @onclick="GeneratePassphrase">Generate passphrase</button>
+</p>
+
+@code {
+    private string passphrase = "";
+
+    private async Task GeneratePassphrase()
+    {
+        Dictionary<int, string> words = await wordListService.GetWordList();
+
+        passphrase = Passphrase.Generate(6, words, false);
+    }
+}
