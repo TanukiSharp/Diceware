@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -8,8 +7,10 @@ namespace Diceware.Library;
 
 public class WordList
 {
+    private readonly HttpClient httpClient;
+
     private readonly string downloadUrl;
-    private readonly string localFilename;
+    private readonly IStorage storage;
 
     private Dictionary<int, string> wordList;
 
@@ -28,15 +29,12 @@ public class WordList
         { '4', '5', '6', '7', '8', '9' },
     };
 
-    public WordList(string downloadUrl)
-        : this(downloadUrl, Path.GetFileName(new Uri(downloadUrl).LocalPath))
+    public WordList(HttpClient httpClient, string downloadUrl, IStorage storage)
     {
-    }
+        this.httpClient = httpClient;
 
-    public WordList(string downloadUrl, string localFilename)
-    {
         this.downloadUrl = downloadUrl;
-        this.localFilename = localFilename;
+        this.storage = storage;
     }
 
     private static Dictionary<int, string> LoadFromContent(string content)
@@ -78,7 +76,6 @@ public class WordList
 
     private async Task<string> DownloadWordListAsync()
     {
-        using var httpClient = new HttpClient();
         return await httpClient.GetStringAsync(downloadUrl);
     }
 
@@ -86,20 +83,18 @@ public class WordList
     {
         if (wordList == null)
         {
-            string wordListFilename = Path.Combine(AppContext.BaseDirectory, localFilename);
-
             string content;
 
-            if (forceDownload || File.Exists(wordListFilename) == false)
+            if (forceDownload || storage.IsContentAvailable == false)
             {
                 Console.WriteLine($"Downloading '{downloadUrl}'...");
                 content = await DownloadWordListAsync();
-                Console.WriteLine($"Writing to cache file '{wordListFilename}'...");
-                await File.WriteAllTextAsync(wordListFilename, content);
+                Console.WriteLine($"Writing to cache...");
+                await storage.SaveContent(content);
                 Console.WriteLine("Done.");
             }
             else
-                content = await File.ReadAllTextAsync(wordListFilename);
+                content = await storage.LoadContent();
 
             wordList = LoadFromContent(content);
         }

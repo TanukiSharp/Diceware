@@ -2,9 +2,9 @@
 
 namespace Diceware.Library;
 
-public static class Diceware
+public static class Passphrase
 {
-    public static string GeneratePassphrase(int wordCount, Dictionary<int, string> words, bool extraSecurity)
+    public static string Generate(int wordCount, Dictionary<int, string> words, bool extraSecurity)
     {
         string[] passphrase = new string[wordCount];
 
