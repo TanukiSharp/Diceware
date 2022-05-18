@@ -8,7 +8,7 @@ public class WordListService
 
     public WordListService(HttpClient httpClient)
     {
-        var wordList = new WordList(httpClient, "/diceware.wordlist.asc", new NullStorage());
+        var wordList = new WordList(httpClient, "./diceware.wordlist.asc", new NullStorage());
         words = wordList.GetWordList(false);
     }
 
