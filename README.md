@@ -5,7 +5,7 @@ http://world.std.com/~reinhold/diceware.html
 
 # Web application
 
-You can use a web version [here](https://tanukisharp.github.io/Diceware/).
+You can use a web version <a href="https://tanukisharp.github.io/Diceware/" target="_blank">here</a>.
 
 # Install
 
