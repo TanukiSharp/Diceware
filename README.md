@@ -3,6 +3,10 @@
 This project is a .NET command line tool that randomly generates pass-phrases based on the Diceware(TM) concept.<br/>
 http://world.std.com/~reinhold/diceware.html
 
+# Web application
+
+You can use a web version [here](https://tanukisharp.github.io/Diceware/).
+
 # Install
 
 You must have .NET 6 or higher.
