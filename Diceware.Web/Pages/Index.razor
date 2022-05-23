@@ -2,21 +2,37 @@
 @using Diceware.Library
 
 @inject WordListService wordListService;
+@inject EntropyService entropyService;
 
-<p>
-<span>Result: @passphrase</span>
-</p>
-<p>
-<button @onclick="GeneratePassphrase">Generate passphrase</button>
-</p>
+<div class="root-container">
+    <span class="word-count label">Words count:</span>
+    <input class="word-count value" type="range" min="4" max="12" @bind-value="@wordCount" @bind-value:event="oninput"/>
+    <span class="word-count confirm value">@wordCount</span>
+
+    <label class="extra-security label" for="extra-security">Extra security:</label>
+    <input class="extra-security value" type="checkbox" id="extra-security" @bind-value="@extraSecurity"/>
+
+    <button class="generate" @onclick="GeneratePassphrase">Generate passphrase</button>
+
+    <span class="passphrase-result value">Result: @passphrase</span>
+    <span class="passphrase-result value">(entropy: @entropy bits, @strength)</span>
+</div>
 
 @code {
-    private string passphrase = "";
+    private int wordCount = 6;
+    private bool extraSecurity = false;
+
+    private string passphrase = string.Empty;
+    private double entropy;
+    private string strength = string.Empty;
 
     private async Task GeneratePassphrase()
     {
         Dictionary<int, string> words = await wordListService.GetWordList();
 
-        passphrase = Passphrase.Generate(6, words, false);
+        passphrase = Passphrase.Generate(wordCount, words, extraSecurity);
+
+        entropy = Math.Round(await entropyService.Compute(passphrase, extraSecurity), 1);
+        strength = EntropyCalculator.StrengthLevelToEnglishText(EntropyCalculator.EntropyToStrengthLevel(entropy));
     }
 }

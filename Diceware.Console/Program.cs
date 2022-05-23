@@ -58,7 +58,14 @@ class Program
         var wordList = new WordList(httpClient, downloadUrl, new DiskStorage(Path.GetFileName(new Uri(downloadUrl).LocalPath)));
 
         Dictionary<int, string> words = await wordList.GetWordList(forceDownload);
+        EntropyCalculator entropyCalculator = new(words);
 
-        System.Console.WriteLine(Passphrase.Generate(wordCount, words, extraSecurity));
+        string passphrase = Passphrase.Generate(wordCount, words, extraSecurity);
+
+        double entropy = Math.Round(entropyCalculator.Compute(passphrase, extraSecurity), 1);
+        string strength = EntropyCalculator.StrengthLevelToEnglishText(EntropyCalculator.EntropyToStrengthLevel(entropy));
+
+        System.Console.WriteLine($"Passphrase: {passphrase}");
+        System.Console.WriteLine($"Entropy:    {entropy} bits ({strength})");
     }
 }
