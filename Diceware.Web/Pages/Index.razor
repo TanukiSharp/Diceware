@@ -5,17 +5,26 @@
 @inject EntropyService entropyService;
 
 <div class="root-container">
-    <span class="word-count label">Words count:</span>
-    <input class="word-count value" type="range" min="4" max="12" @bind-value="@wordCount" @bind-value:event="oninput"/>
-    <span class="word-count confirm value">@wordCount</span>
+    <div class="word-count">
+        <span class="label">Words count:</span>
+        <input class="value" type="range" min="4" max="12" @bind-value="@wordCount" @bind-value:event="oninput"/>
+        <span class="confirm value">@wordCount</span>
+    </div>
 
-    <label class="extra-security label" for="extra-security">Extra security:</label>
-    <input class="extra-security value" type="checkbox" id="extra-security" @bind-value="@extraSecurity"/>
+    <div class="extra-security">
+        <label class="label" for="extra-security">Extra security:</label>
+        <input class="value" type="checkbox" id="extra-security" @bind-value="@extraSecurity"/>
+    </div>
 
     <button class="generate" @onclick="GeneratePassphrase">Generate passphrase</button>
 
-    <span class="passphrase-result value">Result: @passphrase</span>
-    <span class="passphrase-result value">(entropy: @entropy bits, @strength)</span>
+    <div class="passphrase-result">
+        <span class="label">Result:</span>
+        <span class="value result">@passphrase</span>
+        <div class="value entropy">
+            Length: <span class="emphasis">@passphrase.Length</span>, entropy: <span class="emphasis">@entropy</span> bits, @strength
+        </div>
+    </div>
 </div>
 
 @code {

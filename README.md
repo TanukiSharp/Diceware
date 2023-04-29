@@ -7,6 +7,8 @@ http://world.std.com/~reinhold/diceware.html
 
 You can use a web version <a href="https://tanukisharp.github.io/Diceware/" target="_blank">here</a>.
 
+![](./Documentation/webapp.png)
+
 # Install
 
 You must have .NET 6 or higher.

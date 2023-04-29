@@ -187,12 +187,12 @@ public class EntropyCalculator
     {
         switch (strengthLevel)
         {
-            case StrengthLevel.ExtremelyStrong: return "Extremely strong";
-            case StrengthLevel.VeryStrong: return "Very strong";
-            case StrengthLevel.Strong: return "Strong";
-            case StrengthLevel.Reasonable: return "Reasonable";
-            case StrengthLevel.Weak: return "Weak";
-            case StrengthLevel.ExtremelyWeak: return "Extremely weak.";
+            case StrengthLevel.ExtremelyStrong: return "extremely strong";
+            case StrengthLevel.VeryStrong: return "very strong";
+            case StrengthLevel.Strong: return "strong";
+            case StrengthLevel.Reasonable: return "reasonable";
+            case StrengthLevel.Weak: return "weak";
+            case StrengthLevel.ExtremelyWeak: return "extremely weak.";
         }
 
         return $"<{strengthLevel}>";

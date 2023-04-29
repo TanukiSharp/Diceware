@@ -1,4 +1,4 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -35,3 +35,62 @@ h1:focus {
 
     .blazor-error-boundary::after {
         content: "An error has occurred.";
+    }
+
+.root-container {
+    display: grid;
+    justify-items: start;
+    justify-content: start;
+    align-items: center;
+    grid-auto-rows: auto;
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+    margin: 8px;
+}
+
+.root-container .value {
+    margin-left: 16px;
+}
+
+.root-container > .word-count {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: auto;
+    grid-template-rows: auto;
+}
+
+.root-container > .word-count > .value {
+    width: 150px;
+}
+
+.root-container > .extra-security {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: auto;
+    grid-template-rows: auto;
+}
+
+.root-container > .extra-security > .value {
+    zoom: 1.2;
+}
+
+.root-container > .passphrase-result {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+    grid-template-columns: auto;
+}
+
+.root-container > .passphrase-result > .value.result {
+    border: gray 1px solid;
+    border-radius: 2px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: whitesmoke;
+    padding: 8px;
+    justify-self: start;
+}
+
+.root-container > .passphrase-result > .value.entropy > .emphasis {
+    color: cornflowerblue;
+    font-weight: bold;
+}
